@@ -388,6 +388,26 @@
   <h2 class="total-count">Total Countries: <%=total%>
   </h2>
   <script>
+  const visitedCountries = <%- JSON.stringify(countries) %>;
+  const highlightColor = "<%= color %>";
+
+  let coloredCount = 0;
+
+  visitedCountries.forEach(code => {
+    const el = document.getElementById(code.toUpperCase());
+    if (el) {
+      el.style.fill = highlightColor;
+      coloredCount++;
+    }else {
+      console.warn(`No SVG element found for country code: ${code}`);
+    }
+  });
+
+  // Update counter
+  document.getElementById("counter").innerText = coloredCount;
+</script>
+
+  <!-- <script>
   // Pass the countries array from Node directly to JS
   const visitedCountries = <%- JSON.stringify(countries) %>;
   const highlightColor = "<%= color %>";
@@ -400,7 +420,7 @@
       console.warn(`No SVG element found for country code: ${code}`);
     }
   });
-</script>
+</script> -->
 
   <!-- <script>
    
